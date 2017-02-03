@@ -11,7 +11,13 @@ Page({
     index_isOffWorkTime:0,
     array_departure:['A','B','C','其他地点'],
     index_departure:0,
-    condition_departure:0
+    condition_departure:0,
+    
+    array_oneOrTwoWay:['否','是'],
+    index_oneOrTwoWay: 0,
+
+    array_workerNeeds:['不需要工人','需要1位工人','需要2位工人','需要3位工人','需要多位工人'],
+    index_workerNeeds: 0,
   },
  
   bindDateChange: function(e) {
@@ -43,10 +49,24 @@ Page({
     this.setData({
       index_departure: e.detail.value
     });
-    if(e.detail.value=3){
-      condition_departure: 1
+    if(e.detail.value==3){
+      this.setData({
+        condition_departure: 1
+      });
     }else{
-      condition_departure: 0
+      this.setData({
+        condition_departure: 0
+      });
     }
-  }
+  },
+  bindPickerOneOrTwoWayChange: function(e) {
+    this.setData({
+      index_oneOrTwoWay: e.detail.value
+    })
+  },
+  bindPickerWorkerNeedsChange: function(e) {
+    this.setData({
+      index_workerNeeds: e.detail.value
+    })
+  },
 })
