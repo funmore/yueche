@@ -29,7 +29,7 @@
     申请人
   </view>
   <view class="content">
-    <input placeholder="申请人姓名" auto-focus/>
+    <input placeholder="申请人姓名" class="input" auto-focus/>
   </view>
 </view>
 <!-- 申请人 -->
@@ -41,7 +41,7 @@
   </view>
   <view class="content">
     <picker bindchange="bindPickerKeshiChange" value="{{index_keshi}}" range="{{array_keshi}}">
-    <view id="keshi">
+    <view>
       {{array_keshi[index_keshi]}}
     </view>
   </picker>
@@ -56,7 +56,7 @@
   </view>
   <view class="content">
     <picker bindchange="bindPickerYongcheleixingChange" value="{{index_yongCheLeiXing}}" range="{{array_yongCheLeiXing}}">
-    <view id="keshi">
+    <view>
       {{array_yongCheLeiXing[index_yongCheLeiXing]}}
     </view>
   </picker>
@@ -70,7 +70,7 @@
     型号助理
   </view>
   <view class="content">
-    <input placeholder="型号助理姓名" auto-focus/>
+    <input placeholder="型号助理姓名" class="input" auto-focus/>
   </view>
 </view>
 <!-- 型号助理 -->
@@ -81,7 +81,7 @@
     乘车人
   </view>
   <view class="content">
-    <input placeholder="乘车人姓名" auto-focus/>
+    <input placeholder="乘车人姓名" class="input" auto-focus/>
   </view>
 </view>
 <!-- 乘车人 -->
@@ -92,7 +92,7 @@
     乘车人联系方式
   </view>
   <view class="content">
-    <input type="digit" placeholder="请输入手机号"/>
+    <input type="digit" class="input" placeholder="请输入手机号"/>
   </view>
 </view>
 <!-- 乘车人手机号 -->
@@ -104,7 +104,7 @@
   </view>
   <view class="content">
     <picker bindchange="bindPickerIsOffWorkTime" value="{{index_isOffWorkTime}}" range="{{array_isOffWorkTime}}">
-    <view id="keshi">
+    <view>
       {{array_isOffWorkTime[index_isOffWorkTime]}}
     </view>
   </picker>
@@ -119,7 +119,7 @@
   </view>
   <view class="content">
     <picker bindchange="bindPickerDeparture" value="{{index_departure}}" range="{{array_departure}}">
-    <view id="keshi">
+    <view>
       {{array_departure[index_departure]}}
     </view>
   </picker>
@@ -133,7 +133,7 @@
     请输入详细出发地
   </view>
   <view class="content">
-    <input placeholder="出发地" auto-focus/>
+    <input placeholder="出发地" class="input" auto-focus/>
   </view>
 </view>
 <!-- 具体出发地 -->
@@ -145,7 +145,7 @@
   </view>
   <view class="content">
     <picker bindchange="bindPickerDest" value="{{index_dest}}" range="{{array_dest}}">
-    <view id="keshi">
+    <view>
       {{array_dest[index_dest]}}
     </view>
   </picker>
@@ -159,7 +159,7 @@
     请输入详细目的地
   </view>
   <view class="content">
-    <input placeholder="目的地" auto-focus/>
+    <input placeholder="目的地" class="input" auto-focus/>
   </view>
 </view>
 <!-- 具体目的地 -->
@@ -171,7 +171,7 @@
   </view>
   <view class="content">
     <picker bindchange="bindPickerOneOrTwoWayChange" value="{{index_oneOrTwoWay}}" range="{{array_oneOrTwoWay}}">
-    <view id="keshi">
+    <view>
       {{array_oneOrTwoWay[index_oneOrTwoWay]}}
     </view>
   </picker>
@@ -186,7 +186,7 @@
   </view>
   <view class="content">
     <picker bindchange="bindPickerWorkerNeedsChange" value="{{index_workerNeeds}}" range="{{array_workerNeeds}}">
-    <view id="keshi">
+    <view>
       {{array_workerNeeds[index_workerNeeds]}}
     </view>
   </picker>
@@ -200,7 +200,7 @@
     申请用车备注
   </view>
   <view class="content">
-    <input placeholder="备注" auto-focus/>
+    <input placeholder="备注" class="input" auto-focus/>
   </view>
 </view>
 <!-- 申请用车备注 -->

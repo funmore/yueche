@@ -9,9 +9,9 @@ Page({
     index_yongCheLeiXing: 0,
     array_isOffWorkTime:['否','是'],
     index_isOffWorkTime:0,
-    array_departure:['A','B','C','其他地点'],
+    array_departure:['东院8号楼','东院研发楼','西院74号楼','其他地点'],
     index_departure:0,
-    array_dest:['A','B','C','其他地点'],
+    array_dest:['东院8号楼','东院研发楼','西院74号楼','其他地点'],
     index_dest:0,
     
     array_oneOrTwoWay:['否','是'],
