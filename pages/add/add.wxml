@@ -64,6 +64,17 @@
 </view>
 <!-- 用车类型 -->
 
+<!-- 型号助理 -->
+<view class="section" wx:if="{{index_yongCheLeiXing==1}}">
+  <view class="name">
+    型号助理
+  </view>
+  <view class="content">
+    <input placeholder="型号助理姓名" auto-focus/>
+  </view>
+</view>
+<!-- 型号助理 -->
+
 <!-- 乘车人 -->
 <view class="section passenger">
   <view class="name">
@@ -112,13 +123,20 @@
       {{array_departure[index_departure]}}
     </view>
   </picker>
-  <view wx:if="{{condition_departure}}">
-    <input placeholder="出发地" auto-focus/>
-  </view>
   </view>
 </view>
 <!-- 出发地 -->
 
+<!-- 具体出发地 -->
+<view class="section departure" wx:if="{{index_departure==3}}">
+  <view class="name">
+    请输入详细出发地
+  </view>
+  <view class="content">
+    <input placeholder="出发地" auto-focus/>
+  </view>
+</view>
+<!-- 具体出发地 -->
 
 <!-- 目的地 -->
 <view class="section destination">
@@ -126,17 +144,25 @@
     目的地
   </view>
   <view class="content">
-    <picker bindchange="bindPickerDeparture" value="{{index_departure}}" range="{{array_departure}}">
+    <picker bindchange="bindPickerDest" value="{{index_dest}}" range="{{array_dest}}">
     <view id="keshi">
-      {{array_departure[index_departure]}}
+      {{array_dest[index_dest]}}
     </view>
   </picker>
-  <view wx:if="{{condition_departure}}">
-    <input placeholder="目的地" auto-focus/>
-  </view>
   </view>
 </view>
 <!-- 目的地 -->
+
+<!-- 具体目的地 -->
+<view class="section destination" wx:if="{{index_dest==3}}">
+  <view class="name">
+    请输入详细目的地
+  </view>
+  <view class="content">
+    <input placeholder="目的地" auto-focus/>
+  </view>
+</view>
+<!-- 具体目的地 -->
 
 <!-- 是否往返 -->
 <view class="section destination">

@@ -11,7 +11,8 @@ Page({
     index_isOffWorkTime:0,
     array_departure:['A','B','C','其他地点'],
     index_departure:0,
-    condition_departure:0,
+    array_dest:['A','B','C','其他地点'],
+    index_dest:0,
     
     array_oneOrTwoWay:['否','是'],
     index_oneOrTwoWay: 0,
@@ -49,15 +50,11 @@ Page({
     this.setData({
       index_departure: e.detail.value
     });
-    if(e.detail.value==3){
-      this.setData({
-        condition_departure: 1
-      });
-    }else{
-      this.setData({
-        condition_departure: 0
-      });
-    }
+  },
+  bindPickerDest: function(e) {
+    this.setData({
+      index_dest: e.detail.value
+    });
   },
   bindPickerOneOrTwoWayChange: function(e) {
     this.setData({
