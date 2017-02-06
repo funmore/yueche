@@ -1,3 +1,5 @@
+var sha1=require('../../utils/sha1.js');
+var app=getApp();
 Page({
   data: {
 
@@ -66,4 +68,30 @@ Page({
       index_workerNeeds: e.detail.value
     })
   },
+  applyForCar:function(e){
+    wx.showModal({
+        content: '确定提交用车申请？',
+        success: function(res) {
+        if (res.confirm) {
+          var timestamp = Date.parse(new Date());
+          timestamp = timestamp / 1000;
+          wx.request({
+              url: 'test.php', //正吉url
+              data: {
+                 token:wx.getStorageSync('token'),
+                 t:timestamp,
+                 s:sha1.hex_sha1(app.data.key+timestamp)
+              },
+              header: {
+                  'content-type': 'application/json'
+              },
+              method:'POST',
+              success: function(res) {
+                console.log(res.data)
+              }
+            })
+        }
+  }
+}) 
+  }
 })

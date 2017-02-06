@@ -205,6 +205,12 @@
 </view>
 <!-- 申请用车备注 -->
 
+<!-- 申请用车备注 -->
+<view class="section">
+  <button type="primary" size="{{primarySize}}"  bindtap="applyForCar"> 申请用车 </button>
+</view>
+<!-- 申请用车备注 -->
+
 
 
 
