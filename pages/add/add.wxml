@@ -29,7 +29,7 @@
     申请人
   </view>
   <view class="content">
-    <input placeholder="申请人姓名" class="input" auto-focus/>
+    <input placeholder="申请人姓名" class="input" bindblur="applyerInput" auto-focus/>
   </view>
 </view>
 <!-- 申请人 -->
@@ -48,6 +48,17 @@
   </view>
 </view>
 <!-- 申请科室 -->
+
+<!-- 用车原因 -->
+<view class="section">
+  <view class="name">
+    乘车原因
+  </view>
+  <view class="content">
+    <input placeholder="仿真实验等" class="input" bindblur="reasonInput" auto-focus/>
+  </view>
+</view>
+<!-- 用车原因 -->
 
 <!-- 用车类型 -->
 <view class="section">
@@ -70,7 +81,7 @@
     型号助理
   </view>
   <view class="content">
-    <input placeholder="型号助理姓名" class="input" auto-focus/>
+    <input placeholder="型号助理姓名" class="input" bindblur="managerInput" auto-focus/>
   </view>
 </view>
 <!-- 型号助理 -->
@@ -81,7 +92,7 @@
     乘车人
   </view>
   <view class="content">
-    <input placeholder="乘车人姓名" class="input" auto-focus/>
+    <input placeholder="乘车人姓名" class="input" bindblur="passengerInput"  auto-focus/>
   </view>
 </view>
 <!-- 乘车人 -->
@@ -92,7 +103,7 @@
     乘车人联系方式
   </view>
   <view class="content">
-    <input type="digit" class="input" placeholder="请输入手机号"/>
+    <input type="digit" class="input" bindblur="passengerTelInput" placeholder="请输入手机号"/>
   </view>
 </view>
 <!-- 乘车人手机号 -->
@@ -133,7 +144,7 @@
     请输入详细出发地
   </view>
   <view class="content">
-    <input placeholder="出发地" class="input" auto-focus/>
+    <input placeholder="出发地" class="input" bindblur="departInput" auto-focus/>
   </view>
 </view>
 <!-- 具体出发地 -->
@@ -159,7 +170,7 @@
     请输入详细目的地
   </view>
   <view class="content">
-    <input placeholder="目的地" class="input" auto-focus/>
+    <input placeholder="目的地" class="input" bindblur="destInput" auto-focus/>
   </view>
 </view>
 <!-- 具体目的地 -->
@@ -200,16 +211,16 @@
     申请用车备注
   </view>
   <view class="content">
-    <input placeholder="备注" class="input" auto-focus/>
+    <input placeholder="备注" class="input" bindblur="notesInput" auto-focus/>
   </view>
 </view>
 <!-- 申请用车备注 -->
 
-<!-- 申请用车备注 -->
+<!-- 申请用车按钮-->
 <view class="section">
   <button type="primary" size="{{primarySize}}"  bindtap="applyForCar"> 申请用车 </button>
 </view>
-<!-- 申请用车备注 -->
+<!-- 申请用车按钮 -->
 
 
 

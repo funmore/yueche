@@ -21,8 +21,60 @@ Page({
 
     array_workerNeeds:['不需要工人','需要1位工人','需要2位工人','需要3位工人','需要多位工人'],
     index_workerNeeds: 0,
+
+
+    applyer:'',
+    passenger:'',
+    passengerTel:'',
+    manager:'',
+    destination:'',
+    departure:'',
+    notes:'',
+
   },
  
+
+  applyerInput:function(e){
+    this.setData({
+      applyer:e.detail.value
+    })
+  },
+  reasonInput:function(e){
+    this.setData({
+      reason:e.detail.value
+    })
+  },
+  managerInput:function(e){
+    this.setData({
+      manager:e.detail.value
+    })
+  },
+  passengerInput:function(e){
+    this.setData({
+      passenger:e.detail.value
+    })
+  },
+  passengerTelInput:function(e){
+    this.setData({
+      passengerTel:e.detail.value
+    })
+  },
+  departInput:function(e){
+    this.setData({
+      departure:e.detail.value
+    })
+  },
+  destInput:function(e){
+    this.setData({
+      destination:e.detail.value
+    })
+  },
+  notesInput:function(e){
+    this.setData({
+      notes:e.detail.value
+    })
+  },
+
   bindDateChange: function(e) {
     this.setData({
       date: e.detail.value
@@ -69,29 +121,57 @@ Page({
     })
   },
   applyForCar:function(e){
+    var data=this.data;
     wx.showModal({
         content: '确定提交用车申请？',
         success: function(res) {
-        if (res.confirm) {
-          var timestamp = Date.parse(new Date());
-          timestamp = timestamp / 1000;
-          wx.request({
-              url: 'test.php', //正吉url
-              data: {
-                 token:wx.getStorageSync('token'),
-                 t:timestamp,
-                 s:sha1.hex_sha1(app.data.key+timestamp)
-              },
-              header: {
-                  'content-type': 'application/json'
-              },
-              method:'POST',
-              success: function(res) {
-                console.log(res.data)
-              }
-            })
+          var a=data;
+            if(res.confirm){
+              var timestamp = Date.parse(new Date());
+              timestamp = timestamp / 1000;
+              wx.request({
+                  url: 'test.php', //正吉url
+                  data: {
+                     token:wx.getStorageSync('token'),
+                     t:timestamp,
+                     s:sha1.hex_sha1(app.data.key+timestamp),
+
+                     usetime:data.date+" "+data.time+":00",
+                     telephone:data.passengerTel,
+                     type:data.index_yongCheLeiXing,
+                     manager:data.manager,
+                     reason: data.reason,   //补全
+                     passenger:data.passenger,
+                     isweekend:data.index_isOffWorkTime,
+                     isreturn:data.index_oneOrTwoWay,
+                     workers:data.index_workerNeeds,
+
+
+
+                     applyer:data.applyer,
+                     keshi:data.index_keshi,                                                    
+                     departIndex:data.index_departure,
+                     departLocation:data.departure,
+                     destIndex:data.index_dest,
+                     destLocation:data.destination,
+                     notes:data.notes
+                  },
+                  header: {
+                      'content-type': 'application/json'
+                  },
+                  method:'POST',
+                  success: function(res) {
+                    console.log(res.data)
+                  }
+                })
+            }
         }
-  }
-}) 
+    });
+    var a=0;
+    
   }
 })
+
+
+          
+          
