@@ -1,0 +1,17 @@
+.radio {
+    display: block;
+    margin-bottom: 10px;
+}
+.section{
+	height: 30px;
+}
+.name{
+    float: left;
+}
+.content{
+    float:right;
+    margin-right: 10px;
+}
+.input{
+	text-align: right;
+}

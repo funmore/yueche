@@ -1,7 +1,8 @@
+var sha1=require('../../utils/sha1.js');
 var app=getApp()
 Page({
   data:{
-    tabs: ['用车申请', '用车审批', '用车调度'],
+    tabs: ['待审批', '待派车','待确认','待评价','全部'],
     stv: {
       windowWidth: 0,
       lineWidth: 0,
@@ -9,25 +10,132 @@ Page({
       tStart: false
     },
     activeTab: 0,
-    state:'',
-    usetime:0,
-    telephone:0,
-    type:'',
-    manager:'',
-    reason: '',   //补全
-    passenger:'',
-    isweekend:0,
-    isreturn:0,
-    workers:0,
-    applyer:'',
-    keshi:0,                                                    
-    departIndex:0,
-    departLocation:'',
-    destIndex:0,
-    destLocation:'',
-    notes:''
+    role:'',
+    //state: 0：待审查； 1：待派车 2：待确认  3：待评价  4：已完成
+    orderArray:[
+    {
+        id: 0, 
+        unique: 'unique_0',
+        state:0,
+        usetime:'2017-10-12 12:30:30',
+        user_id:0,
+        telephone:'13269387620',
+        type:0,
+        manager:0,
+        reason: '办公',   //补全
+        passenger:'丽丽',
+        mobilephone:'13207692533',
+        isweekend:0,
+        isreturn:0,
+        workers:'五人',                                                   
+        origin:['东院8号楼'],
+        destination:['南苑研发中心','首都机场'],
+        remark:'无'
+      },
+      {
+        id: 0, 
+        unique: 'unique_0',
+        state:1,
+        usetime:'2017-10-12 12:30:30',
+        user_id:0,
+        telephone:'13269387620',
+        type:0,
+        manager:0,
+        reason: '办公',   //补全
+        passenger:'丽丽',
+        mobilephone:'13207692533',
+        isweekend:0,
+        isreturn:0,
+        workers:'五人',                                                   
+        origin:['东院8号楼'],
+        destination:['南苑研发中心','首都机场'],
+        remark:'无'
+      },
+      {
+        id: 0, 
+        unique: 'unique_0',
+        state:2,
+        usetime:'2017-10-12 12:30:30',
+        user_id:0,
+        telephone:'13269387620',
+        type:0,
+        manager:0,
+        reason: '办公',   //补全
+        passenger:'丽丽',
+        mobilephone:'13207692533',
+        isweekend:0,
+        isreturn:0,
+        workers:'五人',                                                   
+        origin:['东院8号楼'],
+        destination:['南苑研发中心','首都机场'],
+        remark:'无'
+      },
+      {
+        id: 0, 
+        unique: 'unique_0',
+        state:3,
+        usetime:'2017-10-12 12:30:30',
+        user_id:0,
+        telephone:'13269387620',
+        type:0,
+        manager:0,
+        reason: '办公',   //补全
+        passenger:'丽丽',
+        mobilephone:'13207692533',
+        isweekend:0,
+        isreturn:0,
+        workers:'五人',                                                   
+        origin:['东院8号楼'],
+        destination:['南苑研发中心','首都机场'],
+        remark:'无'
+      },
+      {
+        id: 1, 
+        unique: 'unique_1',
+        state:4,
+        usetime:'2017-10-12 12:30:30',
+        user_id:0,
+        telephone:'13269387620',
+        type:0,
+        manager:0,
+        reason: '办公',   //补全
+        passenger:'周杰伦',
+        mobilephone:'13931918486',
+        isweekend:0,
+        isreturn:0,
+        workers:'五人',                                                   
+        origin:['东院8号楼'],
+        destination:['南苑研发中心','首都机场1','首都机场2'],
+        remark:'无'
+      }
+    ]
   },
+  onShow:function(options){
+      var timestamp = Date.parse(new Date());
+              timestamp = timestamp / 1000;
+              wx.request({
+                  url: 'test.php', //正吉url 获取订单
+                  data: {
+                     token:wx.getStorageSync('token'),
+                     t:timestamp,
+                     s:sha1.hex_sha1(app.data.key+timestamp),
+
+                    
+                  },
+                  header: {
+                      'content-type': 'application/json'
+                  },
+                  method:'GET',
+                  success: function(res) {
+                    //处理订单code
+                    //处理订单codd end 
+                  }
+                })
+  },
+  
   onLoad:function(options){
+    //联调使用
+   //this.getBasicInfo();
    try {
       let {tabs} = this.data; 
       var res = wx.getSystemInfoSync()
@@ -38,6 +146,19 @@ Page({
       this.tabsCount = tabs.length;
     } catch (e) {
     }
+
+    // wx.getUserInfo({
+    //     success: function(res) {
+    //       var userInfo = res.userInfo
+    //       var nickName = userInfo.nickName
+    //       var avatarUrl = userInfo.avatarUrl
+    //       var gender = userInfo.gender //性别 0：未知、1：男、2：女 
+    //       var province = userInfo.province
+    //       var city = userInfo.city
+    //       var country = userInfo.country
+    //     }
+    //   })      
+
   },
   handlerStart(e) {
     let {clientX, clientY} = e.touches[0];
@@ -118,9 +239,60 @@ Page({
     this.setData({activeTab: activeTab})
     stv.offset = stv.windowWidth*activeTab;
     this.setData({stv: this.data.stv});
-    _updateSelectedPageData(page);
+    this._updateSelectedPageData(page);
   },
   handlerTabTap(e) {
     this._updateSelectedPage(e.currentTarget.dataset.index);
+  },
+  checkOrder:function(e){
+    var item=e.target.dataset.item;
+    app.item=item;
+    wx.navigateTo({
+      url: "../indexInfo/checkOrder/checkOrder"
+    })
+  },
+  confirmOrder:function(e){
+    var item=e.target.dataset.item;
+    wx.showModal({
+        content: '确认完成乘车？',
+        success: function(res) {
+          var a=data;
+            if(res.confirm){
+              var timestamp = Date.parse(new Date());
+              timestamp = timestamp / 1000;
+              wx.request({
+                  url: 'test.php', //正吉url
+                  data: {
+                     token:wx.getStorageSync('token'),
+                     t:timestamp,
+                     s:sha1.hex_sha1(app.data.key+timestamp),
+                     
+
+                     id:item.id
+                  },
+                  header: {
+                      'content-type': 'application/json'
+                  },
+                  method:'POST',
+                  success: function(res) {
+                    if(res.data.state==1){
+                      wx.redirectTo({
+                            url: '../orderInfo/orderSuccess/orderSuccess',
+                            fail:function(e){
+                              wx.redirectTo({
+                                url:'../orderInfo/orderFail/orderFail'
+                              })
+                            }
+                          })
+                    }else{
+                      wx.redirectTo({
+                        url:'../orderInfo/orderFail/orderFail'
+                      })
+                    }
+                  }
+                })
+            }
+        }
+    });
   }
 })

@@ -54,11 +54,60 @@
   bottom: 0;
   display: flex;
 }
-.stv-container .scroll-view .scroll-view-wrapper .one-scene {
+.stv-container .scroll-view .scroll-view-wrapper {
   height: 100%;
+}
+.one-scene {
+  height: 1065rpx;
 }
 .one-scene text {
   display: flex;
   justify-content: center;
   padding-top: 200rpx;
+
+}
+.sOrder {
+  height: 340rpx;
+  width: 720rpx;
+  background-color: white;
+  border-radius: 5%; 
+  margin: 0 auto;
+  margin-top: 10rpx;
+  /*text-align: center;*/
+}
+.state{
+  float:left;
+  width: 30%;
+  height: 100%;
+  text-align: center;
+  line-height: 340rpx;
+  font-size: xx-large;
+}
+.info{
+  float:right;
+  width: 70%;
+  height: 100%;
+  position: relative;
+}
+.time{
+margin-top:10rpx;
+}
+.location{
+  display: flex;
+  flex-direction:row;
+  flex-wrap: wrap;
+  margin-top:10rpx;
+}
+.button{
+  position: absolute;
+  bottom: 0;
+  right:0;
+  margin: 10rpx;
+  display: flex;
+  flex-direction:row;
+ /* height: 40px;
+  width: 20px;*/
+}
+.button >button{
+  margin: 10rpx;
 }

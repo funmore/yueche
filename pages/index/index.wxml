@@ -8,10 +8,43 @@
   </view>
   <view class="scroll-view">
     <view bindtouchstart="handlerStart" catchtouchmove="handlerMove" bindtouchcancel="handlerCancel" bindtouchend="handlerEnd"  class="scroll-view-wrapper {{!stv.tStart? 'withAnimate': ''}}" style="left: -{{stv.offset}}px">
-      <view style="width: {{stv.windowWidth}}px;" wx:for="{{tabs}}" wx:key="unique" class="one-scene">
-         <text>这是第{{index+1}}个页面</text>
-         <view>测试</view>
-      </view>
-    </view>
+      <scroll-view scroll-y="true" scroll-top="33px" style="width: {{stv.windowWidth}}px;" wx:for="{{tabs}}" wx:key="*this" class="one-scene" wx:for-index="tabIndex">
+         <view class="sOrder" wx:for="{{orderArray}}" wx:key="*this" wx:if="{{(tabIndex==item.state)||tabIndex==4}}">
+                  <view class="state">
+                      <view wx:if="{{item.state==0}}"> 待审批 </view>
+                      <view wx:elif="{{item.state== 1}}"> 待派车 </view>
+                      <view wx:elif="{{item.state== 2}}"> 待评价 </view>
+                      <view wx:else> 已完成 </view>
+                  </view>
+                  <view class="info">
+                      <view class="time">
+                        {{item.usetime}}
+                      </view>
+                      <view class="location">
+                          <view wx:for="{{item.origin}}" wx:key="*this" class="location" wx:for-item="itemOrigin">
+                              <view>{{itemOrigin}}</view>
+                              <view>
+                              <image style="width: 20px; height: 20px; " mode="aspectFit" src="../../images/箭头右.png"></image>
+                              </view>
+                          </view>
+                          <view wx:for="{{item.destination}}" wx:key="*this" class="location" wx:for-item="itemDest">
+                              <view>{{itemDest}}</view>
+                              <view wx:if="{{index<(item.destination.length-1)}}">
+                              <image style="width: 20px; height: 20px; " mode="aspectFit" src="../../images/箭头右.png"></image>
+                              </view>
+                          </view>
+                      </view>   <!-- location end -->
+                      <view class="button" >
+
+                          <button bindtap="checkOrder"  data-item="{{item}}">查看详情</button>
+                          <button wx:if="{{item.state<2}}" data-item="{{item}}" bindtap="cancelOrder">取消乘车</button>
+                          <button wx:if="{{item.state==2}}" data-item="{{item}}"  bindtap="confirmOrder">确认乘车</button>
+                          <button wx:if="{{item.state==3}}" data-item="{{item}}"  bindtap="confirmOrder">评价</button>
+                          <button wx:if="{{item.state==4}}" data-item="{{item}}"  disabled="true" >已完成</button>
+                      </view> <!-- button end -->
+                  </view> <!-- info end -->
+          </view>   <!-- sOrder end -->
+    </scroll-view>  
   </view>
+</view>
 </view>

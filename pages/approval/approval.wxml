@@ -1,0 +1,50 @@
+<view class="stv-container">
+  <view class="tab-bar">
+    <view wx:for="{{tabs}}" wx:key="unique" data-index=
+    "{{index}}" bindtap="handlerTabTap" class="tab {{activeTab==index?'tab-active':''}}" style="width: {{stv.windowWidth/tabs.length}}px">
+      <text>{{item}}</text>
+    </view>
+    <view style="width: {{stv.lineWidth}}px; left: {{stv.offset/tabs.length}}px" class="under-line {{!stv.tStart? 'withAnimate': ''}}"></view>
+  </view>
+  <view class="scroll-view">
+    <view bindtouchstart="handlerStart" catchtouchmove="handlerMove" bindtouchcancel="handlerCancel" bindtouchend="handlerEnd"  class="scroll-view-wrapper {{!stv.tStart? 'withAnimate': ''}}" style="left: -{{stv.offset}}px">
+      <scroll-view scroll-y="true" scroll-top="33px" style="width: {{stv.windowWidth}}px;" wx:for="{{tabs}}" wx:key="*this" class="one-scene" wx:for-index="tabIndex">
+         <view class="sOrder" wx:for="{{orderArray}}" wx:key="*this" wx:if="{{((tabIndex==0)&&(item.state==0))||((tabIndex==1)&&(item.state>0))}}">
+                  <view class="state">
+                      <view wx:if="{{item.state==0}}"> 待审批 </view>
+                      <view wx:elif="{{item.state== 1}}"> 待派车 </view>
+                      <view wx:elif="{{item.state== 2}}"> 待评价 </view>
+                      <view wx:else> 已完成 </view>
+                  </view>
+                  <view class="info">
+                      <view class="time">
+                        {{item.usetime}}
+                      </view>
+                      <view class="location">
+                          <view wx:for="{{item.origin}}" wx:key="*this" class="location" wx:for-item="itemOrigin">
+                              <view>{{itemOrigin}}</view>
+                              <view>
+                              <image style="width: 20px; height: 20px; " mode="aspectFit" src="../../images/箭头右.png"></image>
+                              </view>
+                          </view>
+                          <view wx:for="{{item.destination}}" wx:key="*this" class="location" wx:for-item="itemDest">
+                              <view>{{itemDest}}</view>
+                              <view wx:if="{{index<(item.destination.length-1)}}">
+                              <image style="width: 20px; height: 20px; " mode="aspectFit" src="../../images/箭头右.png"></image>
+                              </view>
+                          </view>
+                      </view>   <!-- location end -->
+                      <view class="button" >
+
+                          <button bindtap="checkOrder"  data-item="{{item}}">查看详情</button>
+                          <button wx:if="{{item.state==0}}" data-item="{{item}}" bindtap="approval">审批同意</button>
+                          <button wx:if="{{item.state==0}}" data-item="{{item}}" bindtap="disapproval">审批拒绝</button>
+                          <button wx:if="{{item.state>0}}" data-item="{{item}}"  bindtap="confirmOrder">已审批</button>
+                          
+                      </view> <!-- button end -->
+                  </view> <!-- info end -->
+          </view>   <!-- sOrder end -->
+    </scroll-view>  
+  </view>
+</view>
+</view>

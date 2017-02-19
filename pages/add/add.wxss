@@ -18,3 +18,7 @@
 .input{
 	text-align: right;
 }
+.navigator{
+	width: 20px;
+	height: 20px;
+}

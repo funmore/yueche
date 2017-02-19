@@ -1,5 +1,6 @@
 var sha1=require('../../utils/sha1.js');
 var app=getApp();
+// var origin=require('../orderInfo/origin/origin.js');
 Page({
   data: {
 
@@ -11,24 +12,21 @@ Page({
     index_yongCheLeiXing: 0,
     array_isOffWorkTime:['否','是'],
     index_isOffWorkTime:0,
-    array_departure:['东院8号楼','东院研发楼','西院74号楼','其他地点'],
-    index_departure:0,
     array_dest:['东院8号楼','东院研发楼','西院74号楼','其他地点'],
     index_dest:0,
     
     array_oneOrTwoWay:['否','是'],
     index_oneOrTwoWay: 0,
 
-    array_workerNeeds:['不需要工人','需要1位工人','需要2位工人','需要3位工人','需要多位工人'],
-    index_workerNeeds: 0,
-
+    workers:'',
+    origin:[''],
+    dest:[''],
 
     applyer:'',
     passenger:'',
     passengerTel:'',
     manager:'',
     destination:'',
-    departure:'',
     notes:'',
 
   },
@@ -59,11 +57,7 @@ Page({
       passengerTel:e.detail.value
     })
   },
-  departInput:function(e){
-    this.setData({
-      departure:e.detail.value
-    })
-  },
+
   destInput:function(e){
     this.setData({
       destination:e.detail.value
@@ -100,24 +94,14 @@ Page({
       index_isOffWorkTime: e.detail.value
     })
   },
-  bindPickerDeparture: function(e) {
-    this.setData({
-      index_departure: e.detail.value
-    });
-  },
-  bindPickerDest: function(e) {
-    this.setData({
-      index_dest: e.detail.value
-    });
-  },
   bindPickerOneOrTwoWayChange: function(e) {
     this.setData({
       index_oneOrTwoWay: e.detail.value
     })
   },
-  bindPickerWorkerNeedsChange: function(e) {
+  bindWorkerNeedsInput: function(e) {
     this.setData({
-      index_workerNeeds: e.detail.value
+      workers: e.detail.value
     })
   },
   applyForCar:function(e){
@@ -135,33 +119,51 @@ Page({
                      token:wx.getStorageSync('token'),
                      t:timestamp,
                      s:sha1.hex_sha1(app.data.key+timestamp),
-
+                     
                      usetime:data.date+" "+data.time+":00",
-                     telephone:data.passengerTel,
+            
+                     //user_id:
+                     //telephone:
+            
                      type:data.index_yongCheLeiXing,
                      manager:data.manager,
                      reason: data.reason,   //补全
                      passenger:data.passenger,
+                     mobilephone:data.passengerTel,
                      isweekend:data.index_isOffWorkTime,
                      isreturn:data.index_oneOrTwoWay,
-                     workers:data.index_workerNeeds,
+                     workers:data.workers,
 
-
-
-                     applyer:data.applyer,
-                     keshi:data.index_keshi,                                                    
-                     departIndex:data.index_departure,
-                     departLocation:data.departure,
-                     destIndex:data.index_dest,
-                     destLocation:data.destination,
-                     notes:data.notes
+                     origin:data.origin,
+                     dest:data.dest,
+                     remark:data.notes
+                     // applyer:data.applyer,
+                     // keshi:data.index_keshi,                                                    
+                     // departIndex:data.index_departure,
+                     // departLocation:data.departure,
+                     // destIndex:data.index_dest,
+                     // destLocation:data.destination,
+                     // notes:data.notes
                   },
                   header: {
                       'content-type': 'application/json'
                   },
                   method:'POST',
                   success: function(res) {
-                    console.log(res.data)
+                    if(res.data.state==1){
+                      wx.redirectTo({
+                            url: '../orderInfo/orderSuccess/orderSuccess',
+                            fail:function(e){
+                              wx.redirectTo({
+                                url:'../orderInfo/orderFail/orderFail'
+                              })
+                            }
+                          })
+                    }else{
+                      wx.redirectTo({
+                        url:'../orderInfo/orderFail/orderFail'
+                      })
+                    }
                   }
                 })
             }

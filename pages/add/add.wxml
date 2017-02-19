@@ -129,51 +129,28 @@
     出发地
   </view>
   <view class="content">
-    <picker bindchange="bindPickerDeparture" value="{{index_departure}}" range="{{array_departure}}">
-    <view>
-      {{array_departure[index_departure]}}
-    </view>
-  </picker>
+    <navigator url="../orderInfo/origin/origin" class="navigator">
+            <image style="width: 20px; height: 20px; " mode="aspectFit" src="../../images/右箭头.png"></image>
+    </navigator>
   </view>
 </view>
 <!-- 出发地 -->
 
-<!-- 具体出发地 -->
-<view class="section departure" wx:if="{{index_departure==3}}">
-  <view class="name">
-    请输入详细出发地
-  </view>
-  <view class="content">
-    <input placeholder="出发地" class="input" bindblur="departInput" auto-focus/>
-  </view>
-</view>
-<!-- 具体出发地 -->
 
 <!-- 目的地 -->
-<view class="section destination">
+<view class="section departure">
   <view class="name">
     目的地
   </view>
   <view class="content">
-    <picker bindchange="bindPickerDest" value="{{index_dest}}" range="{{array_dest}}">
-    <view>
-      {{array_dest[index_dest]}}
-    </view>
-  </picker>
+    <navigator url="../orderInfo/destination/destination" class="navigator">
+            <image style="width: 20px; height: 20px; " mode="aspectFit" src="../../images/右箭头.png"></image>
+    </navigator>
   </view>
 </view>
 <!-- 目的地 -->
 
-<!-- 具体目的地 -->
-<view class="section destination" wx:if="{{index_dest==3}}">
-  <view class="name">
-    请输入详细目的地
-  </view>
-  <view class="content">
-    <input placeholder="目的地" class="input" bindblur="destInput" auto-focus/>
-  </view>
-</view>
-<!-- 具体目的地 -->
+
 
 <!-- 是否往返 -->
 <view class="section destination">
@@ -196,11 +173,7 @@
     用工详细需求
   </view>
   <view class="content">
-    <picker bindchange="bindPickerWorkerNeedsChange" value="{{index_workerNeeds}}" range="{{array_workerNeeds}}">
-    <view>
-      {{array_workerNeeds[index_workerNeeds]}}
-    </view>
-  </picker>
+    <input placeholder="人数，设备等" class="input" bindblur="bindWorkerNeedsInput" auto-focus/>
   </view>
 </view>
 <!-- 用工详细需求 -->

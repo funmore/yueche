@@ -2,8 +2,13 @@
   "pages":[
     "pages/index/index",
     "pages/add/add",
-    "pages/orders/orders",
-    "pages/account/account"
+    "pages/approval/approval",
+    "pages/account/account",
+    "pages/orderInfo/origin/origin",
+    "pages/orderInfo/destination/destination",
+    "pages/orderInfo/orderFail/orderFail",
+    "pages/orderInfo/orderSuccess/orderSuccess",
+    "pages/indexInfo/checkOrder/checkOrder"
   ],
   "window":{
     "backgroundTextStyle":"light",
@@ -26,10 +31,10 @@
      "pagePath": "pages/add/add",  
      "text": "添加"
    }, {  
-     "selectedIconPath": "images/车.png",  
-     "iconPath": "images/车.png",  
-     "pagePath": "pages/orders/orders",  
-     "text": "行程"  
+     "selectedIconPath": "images/审批.png",  
+     "iconPath": "images/审批.png",  
+     "pagePath": "pages/approval/approval",  
+     "text": "审批"  
    },{
      "selectedIconPath": "images/账户.png",  
      "iconPath": "images/账户.png",  

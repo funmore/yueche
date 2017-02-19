@@ -1,0 +1,138 @@
+<view class="state">
+                      <view wx:if="{{item.state==0}}"> 待审批 </view>
+                      <view wx:elif="{{item.state== 1}}"> 待派车 </view>
+                      <view wx:elif="{{item.state== 2}}"> 待评价 </view>
+                      <view wx:else> 已完成 </view>
+</view>
+
+ <view class="time">
+        {{item.usetime}}
+</view>
+
+<view class="location">
+                          <view wx:for="{{item.origin}}" wx:key="*this" class="location" wx:for-item="itemOrigin">
+                              <view>{{itemOrigin}}</view>
+                              <view>
+                              <image style="width: 20px; height: 20px; " mode="aspectFit" src="../../../images/箭头右.png"></image>
+                              </view>
+                          </view>
+                          <view wx:for="{{item.destination}}" wx:key="*this" class="location" wx:for-item="itemDest">
+                              <view>{{itemDest}}</view>
+                              <view wx:if="{{index<(item.destination.length-1)}}">
+                              <image style="width: 20px; height: 20px; " mode="aspectFit" src="../../../images/箭头右.png"></image>
+                              </view>
+                          </view>
+</view>   <!-- location end -->
+
+
+<view class="section">
+  <view class="name">
+     司机
+  </view>
+  <view class="content">
+    张师傅
+  </view>
+</view>
+<view class="section">
+  <view class="name">
+     车牌号
+  </view>
+  <view class="content">
+    京A45632
+  </view>
+</view>
+<view class="section">
+  <view class="name">
+     联系方式
+  </view>
+  <view class="content">
+    13344445555
+  </view>
+</view>
+<view class="section">
+  <view class="name">
+     乘车原因
+  </view>
+  <view class="content">
+    {{item.reason}}
+  </view>
+</view>
+<view class="section">
+  <view class="name">
+     用车类型
+  </view>
+  <view class="content">
+    {{item.type}}
+  </view>
+</view>
+<view class="section">
+  <view class="name">
+     型号管理员
+  </view>
+  <view class="content">
+    {{item.manager}}
+  </view>
+</view>
+<view class="section">
+  <view class="name">
+     乘车人
+  </view>
+  <view class="content">
+    {{item.passenger}}
+  </view>
+</view>
+<view class="section">
+  <view class="name">
+     乘车人联系方式
+  </view>
+  <view class="content">
+    {{item.mobilephone}}
+  </view>
+</view>
+<view class="section">
+  <view class="name">
+     车牌号
+  </view>
+  <view class="content">
+    京A45632
+  </view>
+</view>
+<view class="section">
+  <view class="name">
+     是否往返
+  </view>
+  <view class="content">
+    <view wx:if="{{item.isreturn}}">
+    是
+    </view>
+    <view wx:else> 否 </view>
+  </view>
+</view>
+<view class="section">
+  <view class="name">
+     是否节假日
+  </view>
+  <view class="content">
+    <view wx:if="{{item.isweekend}}">
+    是
+    </view>
+    <view wx:else> 否 </view>
+  </view>
+</view>
+<view class="section">
+  <view class="name">
+     用工需求
+  </view>
+  <view class="content">
+  {{item.workers}}
+  </view>
+</view>
+<view class="section">
+  <view class="name">
+     备注
+  </view>
+  <view class="content">
+    {{item.remark}}
+  </view>
+</view>
+

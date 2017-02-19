@@ -2,33 +2,66 @@
 var sha1 = require('utils/sha1.js');
 App({
   data: {
-    key: 'GKy2riERcMybIbSimP8zWT5TvrIlrgnn'
+    key: 'GKy2riERcMybIbSimP8zWT5TvrIlrgnn',
+    userInfo:null
   },
   onLaunch: function () {
-    //调用API从本地缓存中获取数据
-    var logs = wx.getStorageSync('logs') || []
-    logs.unshift(Date.now())
-    wx.setStorageSync('logs', logs)
+    this.getBasicInfo()
   },
-  getUserInfo:function(cb){
-    var that = this
-    if(this.globalData.userInfo){
-      typeof cb == "function" && cb(this.globalData.userInfo)
-    }else{
-      //调用登录接口
-      wx.login({
-        success: function () {
-          wx.getUserInfo({
-            success: function (res) {
-              that.globalData.userInfo = res.userInfo
-              typeof cb == "function" && cb(that.globalData.userInfo)
+  getBasicInfo(){
+    //console.log('onLoad')
+    var that = this;
+    //调用登录接口
+    wx.login({
+      success: function(res) {
+        wx.getUserInfo({
+          success: function (res) {
+            //更新数据
+            that.data.userInfo=res.userInfo;
+            // that.setData({
+            //   userInfo:that.data.userInfo
+            // });
+          }
+        });
+        if (res.code) {
+          var timestamp = Date.parse(new Date());
+          timestamp = timestamp / 1000;
+          //发起网络请求
+          wx.request({
+            url: 'http://localhost/api/login',
+            data: {
+              code: res.code,
+              t:timestamp,
+              s: sha1.hex_sha1(that.data.key + timestamp)
+            },
+            success: function(res) {
+              wx.setStorageSync('token', res.data.token);
+              wx.setStorageSync('role', res.data.role);
+
+              var role = res.data.role;
+              if (role == 'employee') {
+    
+              }
+              else if (role == 'admin') {
+                this.data.tabs=this.data.tabs.concat(['用车调度']);
+                this.setData({
+                    tabs: this.data.tabs
+                  });
+              }
+              else if (role == 'company') {
+                
+              }
+              else {
+                that.setData({
+                  motto: '您的微信未被授权，点击输入邀请码'
+                })
+              }
             }
           })
+        } else {
+  
         }
-      })
-    }
-  },
-  globalData:{
-    userInfo:null
+      }
+    }) 
   }
 })
