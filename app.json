@@ -1,6 +1,8 @@
 {
   "pages":[
     "pages/index/index",
+    "pages/order/order",
+    "pages/invate/invate",
     "pages/add/add",
     "pages/approval/approval",
     "pages/account/account",
